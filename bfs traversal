@@ -1,0 +1,71 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+class g
+{
+    public:
+   
+    unordered_map<int,list<int>>m;
+    void makeedge(int u,int v)
+    {
+        m[u].push_back(v);
+        m[v].push_back(u);
+    }
+    void print()
+    {
+        for(auto i:m)
+        {
+            cout<<i.first<<"-->";
+            for(auto it:i.second)
+            {
+                cout<<it<<" ";
+            }
+            cout<<endl;
+        }
+    }
+    vector<int> bfs(int n,int  u)
+    {
+      int vis[n+1]={0};
+        vector<int>ans;
+        queue<int>q;
+        q.push(u);
+        vis[u]=1;
+        while(!q.empty())
+        {
+            int t=q.front();
+            q.pop();
+            ans.push_back(t);
+            for(auto it:m[t])
+            {
+                if(!vis[it])
+                {
+                    vis[it]=1;
+                    q.push(it);
+                }
+            }
+            
+        }
+        return ans;
+    }
+    
+    
+};
+
+int main() {
+    g h;
+    
+  int n,m; cin>>n>>m;
+  for(int i=0;i<m;i++)
+  {
+      int u,v;  cin>>u>>v;
+      h.makeedge(u,v);
+  }
+  h.print();
+ vector<int>kl=h.bfs(n,1);
+ for(auto itr: kl)
+ {
+     cout<<itr<<"...";
+ }
+
+    return 0;
+}
